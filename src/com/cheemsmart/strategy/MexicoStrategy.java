@@ -11,7 +11,7 @@ public class MexicoStrategy extends PaisStrategy {
      */
     @Override
     public void saludarUsuario() {
-        System.out.println("¡Bienvenido a tu tienda preferida, " + clienteActual.getNombre() + "!");
+        System.out.println("¡Bienvenido a tu tienda preferida, " + clienteActual.obtenerNombre() + "!");
     }
 
     /**
@@ -59,7 +59,7 @@ public class MexicoStrategy extends PaisStrategy {
         System.out.println("--- Carrito de compra ---\n");
         carrito.forEach(System.out::println);
         System.out.println("\nPrecio total: $" + precio);
-        System.out.println("\nDinero disponible en su cuenta después del cargo: $" + clienteActual.getDineroDisponible());
+        System.out.println("\nDinero disponible en su cuenta después del cargo: $" + clienteActual.obtenerDineroDisponible());
     }
 
     /**
@@ -70,7 +70,7 @@ public class MexicoStrategy extends PaisStrategy {
         if (obtenerCarrito().isEmpty()) {
             return;
         } else {
-            System.out.println("Su orden será entregada el 29 de febrero a la siguiente dirección: " + clienteActual.getDireccion());
+            System.out.println("Su orden será entregada el 29 de febrero a la siguiente dirección: " + clienteActual.obtenerDireccion());
         }
     }
 

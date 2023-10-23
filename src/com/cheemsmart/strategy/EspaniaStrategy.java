@@ -11,7 +11,7 @@ public class EspaniaStrategy extends PaisStrategy {
      */
     @Override
     public void saludarUsuario() {
-        System.out.println("¡Bienvenido a vuestra tienda preferida, " + clienteActual.getNombre() + "!");
+        System.out.println("¡Bienvenido a vuestra tienda preferida, " + clienteActual.obtenerNombre() + "!");
     }
 
     /**
@@ -58,7 +58,7 @@ public class EspaniaStrategy extends PaisStrategy {
         System.out.println("--- Cesta ---");
         carrito.forEach(System.out::println);
         System.out.println("Precio total: €" + precio);
-        System.out.println("Vuestro saldo de cuenta actualizado: €" + clienteActual.getDineroDisponible());
+        System.out.println("Vuestro saldo de cuenta actualizado: €" + clienteActual.obtenerDineroDisponible());
     }
 
     /**
@@ -69,7 +69,7 @@ public class EspaniaStrategy extends PaisStrategy {
         if (obtenerCarrito().size() < 1) {
             return;
         } else {
-            System.out.println("Vuestro pedido será entregado el 29 de febrero a la siguiente dirección: " + clienteActual.getDireccion());
+            System.out.println("Vuestro pedido será entregado el 29 de febrero a la siguiente dirección: " + clienteActual.obtenerDireccion());
         }
     }
 

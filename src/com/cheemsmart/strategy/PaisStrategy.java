@@ -125,7 +125,7 @@ public abstract class PaisStrategy {
      * @return Descuento total.
      */
     private double calcularDescuento() {
-        String paisOrigen = clienteActual.getPaisOrigen();
+        String paisOrigen = clienteActual.obtenerPaisOrigen();
         double descuentoTotal = 0.0;
 
         for (Producto producto : carrito) {

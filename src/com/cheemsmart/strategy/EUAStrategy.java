@@ -11,7 +11,7 @@ public class EUAStrategy extends PaisStrategy {
      */
     @Override
     public void saludarUsuario() {
-        System.out.println("Welcome, " + clienteActual.getNombre() + "!");
+        System.out.println("Welcome, " + clienteActual.obtenerNombre() + "!");
     }
 
     /**
@@ -55,7 +55,7 @@ public class EUAStrategy extends PaisStrategy {
         System.out.println("--- Shopping cart ---\n");
         carrito.forEach(System.out::println);
         System.out.println("\nOrder total: $" + precio);
-        System.out.println("\nUpdated account balance: $" + clienteActual.getDineroDisponible());
+        System.out.println("\nUpdated account balance: $" + clienteActual.obtenerDineroDisponible());
     }
 
     /**
@@ -66,7 +66,7 @@ public class EUAStrategy extends PaisStrategy {
         if (obtenerCarrito().size() < 1) {
             return;
         } else {
-            System.out.println("Your order will be delivered on February 29 to the following address: " + clienteActual.getDireccion());
+            System.out.println("Your order will be delivered on February 29 to the following address: " + clienteActual.obtenerDireccion());
         }
     }
 

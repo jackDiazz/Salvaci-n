@@ -23,7 +23,7 @@ public class TiendaFecade {
 	 */
 	public TiendaFecade() {
 		Cliente oscarEvil_MX = new Cliente("OscarEvil", "Oscar123", "Oscar",5535465768L ,
-				"Trajineras Xochimilco, CDMX", 22446688, "México",932.51);
+				"Trajineras Xochimilco, CDMX", 22446688, "Mexico",932.51);
 		Cliente leGringoLoco_US = new Cliente("LeGringoLoco", "ILoveGuns", "Steve",5551234567L ,
 				"Albuquerque, Nuevo México", 92648701, "Estados Unidos", 854000);
 		Cliente samuel777_ES = new Cliente("Samuel777", "Eyymuibuenasatoosguaapisimoss", "Samuel ",931234567L ,
@@ -41,16 +41,16 @@ public class TiendaFecade {
 	 * @param password contraseña del usuario
 	 */
 	public void ingresar(String usuario, String password) {
-		boolean existe = clientes.stream().anyMatch(p -> p.getNombreUsuario().equalsIgnoreCase(usuario));
+		boolean existe = clientes.stream().anyMatch(p -> p.obtenerNombreUsuario().equalsIgnoreCase(usuario));
 		if (existe) {
-			Cliente actual = clientes.stream().filter(p -> p.getNombreUsuario().equalsIgnoreCase(usuario)).findFirst()
+			Cliente actual = clientes.stream().filter(p -> p.obtenerNombreUsuario().equalsIgnoreCase(usuario)).findFirst()
 					.get();
-			if (actual.getPassword().equals(password)) {
-				if (actual.getPaisOrigen().equalsIgnoreCase("Spain")) {
+			if (actual.obtenerContraseña().equals(password)) {
+				if (actual.obtenerPaisOrigen().equalsIgnoreCase("Spain")) {
 					tienda = new EspaniaStrategy();
-				} else if (actual.getPaisOrigen().equalsIgnoreCase("Mexico")) {
+				} else if (actual.obtenerPaisOrigen().equalsIgnoreCase("Mexico")) {
 					tienda = new MexicoStrategy();
-				} else if (actual.getPaisOrigen().equalsIgnoreCase("Estados Unidos")) {
+				} else if (actual.obtenerPaisOrigen().equalsIgnoreCase("Estados Unidos")) {
 					tienda = new EUAStrategy();
 				}
 				cliente = new ClienteProxy(actual);
@@ -107,7 +107,7 @@ public class TiendaFecade {
 	public void realizarCompra(int cuenta) {
 		double precioTotal = tienda.calcularPrecioTotal();			
 		try {
-			cliente.pagarProducto(cuenta, precioTotal);						
+			cliente.pagar(cuenta, precioTotal);						
 			tienda.mostrarTicketCompra(precioTotal);
 			tienda.mostrarIndicacionesEntrega();
 		} catch (IllegalArgumentException e) {

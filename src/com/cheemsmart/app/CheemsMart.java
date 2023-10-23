@@ -6,17 +6,6 @@ import java.util.Scanner;
 
 import com.cheemsmart.facade.TiendaFecade;
 
-/**
- * Clase main que implementa la tienda CheemsMart.
- * 
- * @author Cruz González, Irvin Javier
- * @author Ugalde Flores, Jimena
- * @author Ugalde Ubaldo, Fernando
- * 
- * @version 1.0
- * @since Java JDK 11.0
- * 
- */
 public class CheemsMart {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -81,7 +70,7 @@ public class CheemsMart {
 									cliente.request(option);
 									try {
 										int cuenta = sc.nextInt();
-										cliente.terminarCompra(cuenta);
+										cliente.realizarCompra(cuenta);
 										option = 3;
 										break;
 									} catch (InputMismatchException ime) {
