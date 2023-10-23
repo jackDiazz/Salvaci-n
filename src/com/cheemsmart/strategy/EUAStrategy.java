@@ -73,10 +73,17 @@ public class EUAStrategy extends PaisStrategy {
     /**
      * Muestra las opciones relacionadas con el carrito de compras para el usuario estadounidense.
      */
-    @Override
-    public void mostrarOpcionesCarrito() {
-        System.out.println("What would you like to do today? \n1. Add some magic to your cart. \n2. Proceed to checkout. \n3. Wave your wand to cancel or exit.");
-    }
+    /**
+ * Muestra las opciones relacionadas con el carrito de compras para el usuario estadounidense.
+ */
+	@Override
+	public void mostrarOpcionesCarrito() {
+		System.out.println("What would you like to do today?");
+		System.out.println("1. Add some magic to your cart.");
+		System.out.println("2. Proceed to checkout.");
+		System.out.println("3. Wave your wand to cancel or exit.");
+	}
+
 
     /**
      * Solicita al usuario estadounidense ingresar un código de barras para agregar un producto al carrito.

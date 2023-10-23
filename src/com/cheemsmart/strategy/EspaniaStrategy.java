@@ -25,11 +25,18 @@ public class EspaniaStrategy extends PaisStrategy {
     /**
      * Muestra las opciones iniciales disponibles para el usuario español.
      */
-    @Override
-    public void mostrarOpcionesIniciales() {
-        System.out.println("¿Qué desea hacer?");
-        System.out.println("1. Mirar el catálogo. \n2. Comprar productos. \n3. Cerrar sesión. \n4. Salir del programa.");
-    }
+   /**
+ * Muestra las opciones iniciales disponibles para el usuario español.
+ */
+	@Override
+	public void mostrarOpcionesIniciales() {
+		System.out.println("¿Qué desea hacer?");
+		System.out.println("1. Mirar el catálogo.");
+		System.out.println("2. Comprar productos.");
+		System.out.println("3. Cerrar sesión.");
+		System.out.println("4. Salir del programa.");
+	}
+
 
     /**
      * Devuelve un mensaje de error genérico para el usuario español.

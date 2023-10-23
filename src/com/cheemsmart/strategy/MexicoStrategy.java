@@ -23,13 +23,17 @@ public class MexicoStrategy extends PaisStrategy {
     }
 
     /**
-     * Muestra las opciones iniciales disponibles para el usuario mexicano.
-     */
-    @Override
-    public void mostrarOpcionesIniciales() {
-        System.out.println("¿Qué desea hacer?");
-        System.out.println("1. Ver el catálogo. \n2. Comprar productos. \n3. Cerrar sesión. \n4. Salir del programa.");
-    }
+	 * Muestra las opciones iniciales disponibles para el usuario mexicano.
+	 */
+	@Override
+	public void mostrarOpcionesIniciales() {
+		System.out.println("¿Qué desea hacer wey?");
+		System.out.println("1. Ver el catálogo.");
+		System.out.println("2. Comprar productos.");
+		System.out.println("3. Cerrar sesión.");
+		System.out.println("4. Salir del programa.");
+	}
+
 
     /**
      * Devuelve un mensaje de error genérico para el usuario mexicano.
