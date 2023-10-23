@@ -23,7 +23,7 @@ public class TiendaFecade {
 	 */
 	public TiendaFecade() {
 		Cliente oscarEvil_MX = new Cliente("OscarEvil", "Oscar123", "Oscar",5535465768L ,
-				"Trajineras Xochimilco, CDMX", 22446688, "Mexico",932.51);
+				"Trajineras Xochimilco, CDMX", 22446688, "Mexico",9320.51);
 		Cliente leGringoLoco_US = new Cliente("LeGringoLoco", "ILoveGuns", "Steve",5551234567L ,
 				"Albuquerque, Nuevo México", 92648701, "Estados Unidos", 854000);
 		Cliente samuel777_ES = new Cliente("Samuel777", "Eyymuibuenasatoosguaapisimoss", "Samuel ",931234567L ,
@@ -134,7 +134,7 @@ public class TiendaFecade {
 		if(opcion == 1) {
 			tienda.solicitarCodigoBarras();
 		} else if(opcion == 2) {
-			tienda.solicitarCodigoBarras();
+			tienda.solicitarCuentaBancaria();
 		} else if(opcion == 3) {
 			tienda.cancelarCompra();
 		}
