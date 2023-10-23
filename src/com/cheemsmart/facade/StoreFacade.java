@@ -22,7 +22,7 @@ import com.cheemsmart.strategy.*;
  */
 public class StoreFacade {
 	private ArrayList<Cliente> clientes;
-	private Tienda tienda;
+	private PaisStrategy tienda;
 	private Catalogo catalogo;
 	private ClienteProxy cliente;
 
@@ -82,15 +82,15 @@ public class StoreFacade {
 					.get();
 			if (actual.getPassword().equals(password)) {
 				if (actual.getPaisOrigen().equalsIgnoreCase("Spain")) {
-					tienda = new TiendaES();
+					tienda = new EspaniaStrategy();
 				} else if (actual.getPaisOrigen().equalsIgnoreCase("Mexico")) {
-					tienda = new TiendaMX();
+					tienda = new MexicoStrategy();
 				} else if (actual.getPaisOrigen().equalsIgnoreCase("Estados Unidos")) {
-					tienda = new TiendaUS();
+					tienda = new EUAStrategy();
 				}
 				cliente = new ClienteProxy(actual);
 				tienda.setClienteActual(actual);
-				tienda.saludar();
+				tienda.saludarUsuario();
 			} else {
 				throw new IllegalArgumentException("The password that you've entered is incorrect.");
 			}
@@ -110,7 +110,7 @@ public class StoreFacade {
 	 * Método que devuleve las opciones principales del cliente
 	 */
 	public void menuPrincipal() {
-		tienda.opciones();
+		tienda.mostrarOpcionesIniciales();
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class StoreFacade {
 	 */
 	public void opciones() {
 		catalogo.imprimeCatalogo();
-		tienda.opcionesCarrito();
+		tienda.mostrarOpcionesCarrito();
 	}
 	
 	/**
@@ -129,9 +129,9 @@ public class StoreFacade {
 		Producto p = catalogo.entrega(codigo);
 
 		if(p == null) {
-			throw new NoSuchElementException(tienda.opcionIncorrecta());
+			throw new NoSuchElementException(tienda.mensajeErrorGenerico());
 		}
-		tienda.agregarAlCarrito(p);
+		tienda.agregarProductoAlCarrito(p);
 	}
 	
 	/**
@@ -139,15 +139,15 @@ public class StoreFacade {
 	 * @param cuenta cuenta bancaria con la que se va a pagar el precio total
 	 */
 	public void terminarCompra(int cuenta) {
-		double precioTotal = tienda.precio();			
+		double precioTotal = tienda.calcularPrecioTotal();			
 		try {
 			cliente.pagarProducto(cuenta, precioTotal);						
-			tienda.ticket(precioTotal);
-			tienda.entrega();
+			tienda.mostrarTicketCompra(precioTotal);
+			tienda.mostrarIndicacionesEntrega();
 		} catch (IllegalArgumentException iae) {
 			cuentaIncorrecta();
 		} catch(NoSuchElementException nsee) {
-			System.err.println(tienda.dineroInsuficiente());
+			System.err.println(tienda.mensajeErrorDineroInsuficiente());
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class StoreFacade {
 	 * Método que cierra el programa después de haber introducido una cuenta bancaria incorrecta.
 	 */
 	public void cuentaIncorrecta() {
-		System.err.println(tienda.cuentaIncorrecta());
+		System.err.println(tienda.mensajeErrorCuentaIncorrecta());
 		System.exit(0);
 	}
 	
@@ -165,11 +165,11 @@ public class StoreFacade {
 	 */
 	public void request(int opcion) {
 		if(opcion == 1) {
-			tienda.requestBarcode();
+			tienda.solicitarCodigoBarras();
 		} else if(opcion == 2) {
-			tienda.requestAccount();
+			tienda.solicitarCodigoBarras();
 		} else if(opcion == 3) {
-			tienda.cancel();
+			tienda.cancelarCompra();
 		}
 	}
 
@@ -177,7 +177,7 @@ public class StoreFacade {
 	 * Método para cerrar sesión 
 	 */
 	public void cerrarSesion() {
-		tienda.despedirse();
+		tienda.despedirseUsuario();
 		tienda = null;
 	}
 
@@ -185,6 +185,6 @@ public class StoreFacade {
 	 * Método para regresar un error.
 	 */
 	public void error() {
-		System.err.println(tienda.opcionIncorrecta());
+		System.err.println(tienda.mensajeErrorGenerico());
 	}
 }
