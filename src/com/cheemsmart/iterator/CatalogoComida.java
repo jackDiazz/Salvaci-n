@@ -1,54 +1,36 @@
 package com.cheemsmart.iterator;
 
 import java.util.Iterator;
-import java.util.Set;
 import java.util.HashSet;
-import java.util.Random;
 
 import com.cheemsmart.facade.Producto;
 
 /**
- * Clase que implementa el catalogo del dapartamento de alimentos de la tienda.
- * 
- * @author Cruz González, Irvin Javier
- * @author Ugalde Flores, Jimena
- * @author Ugalde Ubaldo, Fernando
- * 
- * @version 1.0
- * @since Java JDK 11.0
- * 
+ * Clase que representa al catálogo de comida 
  */
-public class CatalogoAlimentos {
-	private Set<Producto> catalogo;
+public class CatalogoComida {
+	private HashSet<Producto> catalogo;
 	
 	/**
 	 * Método constructor
 	 */
-	public CatalogoAlimentos() {
+	public CatalogoComida() {
 		catalogo = new HashSet<>();	
-		catalogo.add(new Producto(randomNum(3000, 3999), "Pollo crudo", "Carnes frías", 120));
-		catalogo.add(new Producto(randomNum(3000, 3999), "Paquete de Nuggets", "Carne procesada", 70));
-		catalogo.add(new Producto(randomNum(3000, 3999), "Leche Santa Clara 1.2L", "Lacteos", 70));
-		catalogo.add(new Producto(randomNum(3000, 3999), "Guayaba 1kg", "A. Frutas y Verduras", 40));
-		catalogo.add(new Producto(randomNum(3000, 3999), "Pescado crudo", "Carnes frías", 120));
+
+		catalogo.add(new Producto(1000, "Sopas Pastosas", "Sopita de letras, 200 gr", "Comida", 26.90));
+		catalogo.add(new Producto(1100, "ElvisCochos", "Caja de bizcochos, 540gr", "Comida", 189.00));
+		catalogo.add(new Producto(1110, "Thortillas de harina", "Hechas en Asgard, 1Kg", "Comida", 59.99));
+		catalogo.add(new Producto(1111, "Paul Macarne", "Carnita para burguir, 1Kg", "Comida",199.99));
 	}
 	
-	/**
-	 * Método que da un número random dentro de un intervalo cerrado
-	 * @param low valor mínimo del intervalo
-	 * @param high valor máximo del intervalo
-	 * @return int número random dentro del intervalo
-	 */
-	private static int randomNum(int low, int high) {
-		Random r = new Random();
-		return r.nextInt(high - low) + low;
-	}
 	
 	/**
-	 * Método que devuelve el iterador
-	 * @return Iterator del catalogo
-	 */
+     * Método para obtener el catálogo específico
+	 * @return el iterador del catálogo
+     */
 	public Iterator<Producto> getIterator(){
 		return catalogo.iterator();
 	}
+
+    
 }

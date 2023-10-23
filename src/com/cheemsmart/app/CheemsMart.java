@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import com.cheemsmart.facade.StoreFacade;
+import com.cheemsmart.facade.TiendaFecade;
 
 /**
  * Clase main que implementa la tienda CheemsMart.
@@ -20,7 +20,7 @@ import com.cheemsmart.facade.StoreFacade;
 public class CheemsMart {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		StoreFacade cliente = new StoreFacade();
+		TiendaFecade cliente = new TiendaFecade();
 		int opcion = 0;
 		while (true) {
 			while (true) {

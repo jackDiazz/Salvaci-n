@@ -1,110 +1,117 @@
 package com.cheemsmart.iterator;
 
 import java.util.Iterator;
-import java.util.function.BiPredicate;
 
 import com.cheemsmart.facade.Producto;
 
 /**
- * Clase que implementa el catalogo completo de la tienda.
- * 
- * @author Cruz González, Irvin Javier
- * @author Ugalde Flores, Jimena
- * @author Ugalde Ubaldo, Fernando
- * 
- * @version 1.0
- * @since Java JDK 11.0
+ * Clase que contiene a todos los catálogos juntos como uno solo 
  * 
  */
 public class Catalogo {
-	private CatalogoAlimentos alimentos;
-	private CatalogoElectrodomesticos electrodomesticos;
-	private CatalogoElectronica electronica;
+	private CatalogoComida catalogoComida;
+	private CatalogoMascotas catalogoMascotas;
+	private CatalogoElectronica catalogoElectronica;
+	private CatalogoLimpieza catalogoLimpieza;
+
+	//PERSONALIZACION DE LA TERMINAL
+    public static final String NEG = "\u001b[1m";
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001b[92m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String CYAN = "\u001b[36m";
+    public static final String MAGENTA = "\u001B[35m";
+    public static final String ORANGE = "\u001B[38;5;208m";
+	public static final String BROWN = "\u001B[38;5;94m";
 
 	/**
-	 * Método constructor por defecto
+	 * Método constructor para crear los catálogos
 	 */
 	public Catalogo() {
-		alimentos = new CatalogoAlimentos();
-		electrodomesticos = new CatalogoElectrodomesticos();
-		electronica = new CatalogoElectronica();
+		catalogoComida = new CatalogoComida();
+		catalogoMascotas = new CatalogoMascotas();
+		catalogoElectronica = new CatalogoElectronica();
+		catalogoLimpieza= new CatalogoLimpieza();
+	}
+	
+
+	public Catalogo(CatalogoComida catalogoComida, CatalogoMascotas catalogoMascotas, CatalogoElectronica catalogoElectronica, CatalogoLimpieza catalogoLimpieza) {
+		this.catalogoComida = catalogoComida;
+		this.catalogoMascotas = catalogoMascotas;
+		this.catalogoElectronica = catalogoElectronica;
+		this.catalogoLimpieza= catalogoLimpieza;
 	}
 	
 	/**
-	 * Método constructor donde le pasamos los menus 
-	 * @param alimentos Catálogo del departamento de alimentos
-	 * @param electrodomesticos Catálogo del departamento de electrodomesticos
-	 * @param electronica Catálogo del departamento de electrónica 
+	 * Método para imprimir todos los catálogos
 	 */
-	public Catalogo(CatalogoAlimentos alimentos, CatalogoElectrodomesticos electrodomesticos, CatalogoElectronica electronica) {
-		this.alimentos = alimentos;
-		this.electrodomesticos = electrodomesticos;
-		this.electronica = electronica;
-	}
-	
-	/**
-	 * Método que imprime el catálogo completo.
-	 */
-	public void imprimeCatalogo() {
-		Iterator<Producto> iteradorAlimentos = alimentos.getIterator();
-		Iterator<Producto> iteradorElectrodomesticos = electrodomesticos.getIterator();
-		Iterator<Producto> iteradorElectronica = electronica.getIterator();
+	public void printCatalogoCompleto() {
+		//Usamos un iterador para cada catalogo
+		Iterator<Producto> iteradorCatalogoComida = catalogoComida.getIterator();
+		Iterator<Producto> iteradorCatalogoMascotas = catalogoMascotas.getIterator();
+		Iterator<Producto> iteradorCatalogoElectronica = catalogoElectronica.getIterator();
+		Iterator<Producto> iteradorCatalogoLimpieza=catalogoLimpieza.getIterator();
 		
-		System.out.println("\n--- Catalogo ---\n");
-		imprimeCatalogo(iteradorAlimentos);
+		System.out.println(NEG+CYAN+"\n**MICHI 3B**\n"+RESET);
+		System.out.println(NEG+YELLOW+"COMIDA"+RESET);
+		imprimeCatalogo(iteradorCatalogoComida);
 		System.out.println();
-		imprimeCatalogo(iteradorElectrodomesticos);
+		System.out.println(NEG+BLUE+"ELECTRONICA"+RESET);
+		imprimeCatalogo(iteradorCatalogoElectronica);
 		System.out.println();
-		imprimeCatalogo(iteradorElectronica);
+		System.out.println(NEG+ORANGE+"LIMPIEZA"+RESET);
+		imprimeCatalogo(iteradorCatalogoLimpieza);
+		System.out.println();
+		System.out.println(NEG+BROWN+"MASCOTAS"+RESET);
+		imprimeCatalogo(iteradorCatalogoMascotas);
 	}
 	
 	/**
-	 * Método auxiliar que imprime un catálogo a través de un iterador
-	 * @param iterador Iterator de un catálogo
+	 * Método para imprimir un catálogo a través de su iterador
+	 * @param iterador
 	 */
-    private void imprimeCatalogo(Iterator<Producto> iterador){
-        while(iterador.hasNext()){
-        	Producto p = iterador.next();
-            System.out.println(p + "\n");
-        }
-    }
-    static BiPredicate<Integer, Integer> highInterval = (number, limit) -> number <= limit;
-	static BiPredicate<Integer, Integer> lowInterval = (number, limit) -> limit <= number;
-    static BiPredicate<Integer, Integer> interval = highInterval.and(highInterval);
+	public void imprimeCatalogo(Iterator<Producto> iterador) {
+		while (iterador.hasNext()) {
+			Producto p = iterador.next();
+			System.out.println(p + "\n");
+		}
+	}
 
 	/**
-     * Método que obtiene el producto que se va a entregar
-     * @param codigo int Codigo de barras del producto
-     * @return Producto que se busca o null en otro caso
+     * Método que obtiene el producto que el usuario pide mediante el código de barras
+     * @param barras codigo de barras del producto
+     * @return Producto que se va a entregar
      */
-    public Producto entrega(int codigo) {
+    public Producto getEntregaProducto(int barras) {
 
-    	if(3000 <= codigo && codigo < 4000) {
-    		Iterator<Producto> iteradorAlimentos = alimentos.getIterator();
-    		return buscaProducto(iteradorAlimentos, codigo);
-    	} else if(5000 <= codigo && codigo < 6000) {
-    		Iterator<Producto> iteradorElectronica = electronica.getIterator();
-    		return buscaProducto(iteradorElectronica, codigo);
-    	} else if(7000 < codigo && codigo < 8000) {
-    		Iterator<Producto> iteradorElectrodomesticos = electrodomesticos.getIterator();
-    		return buscaProducto(iteradorElectrodomesticos, codigo);
-    	}
+    	if(barras==1000||barras==1100||barras==1110||barras==1111) {
+    		Iterator<Producto> iteradorCatalogoComida = catalogoComida.getIterator();
+    		return buscaProducto(iteradorCatalogoComida, barras);
+    	} else if(barras==2000||barras==2200||barras==2220||barras==2222) {
+    		Iterator<Producto> iteradorCatalogoElectronica = catalogoElectronica.getIterator();
+    		return buscaProducto(iteradorCatalogoElectronica, barras);
+    	} else if(barras==3000||barras==3300||barras==3330||barras==3333) {
+    		Iterator<Producto> iteradorCatalogoLimpieza = catalogoLimpieza.getIterator();
+    		return buscaProducto(iteradorCatalogoLimpieza, barras);
+    	}else if(barras==4000||barras==4400||barras==4440||barras==4444){
+			Iterator<Producto> iteradorCatalogoMascotas= catalogoMascotas.getIterator();
+			return buscaProducto(iteradorCatalogoMascotas, barras);
+		}
     	return null;
     }
-
-	 
-
     /**
-     * Método auxiliar para buscar un producto.
+     * Método para buscar un producto mediante el iterador y el código de barras
      * @param iterador Iterador del catalogo donde se va a buscar.
-     * @param codigo codigo de barras del producto
-     * @return producto que se va a entregar o null en otro caso
+     * @param barras codigo de barras del producto
+     * @return producto buscado o si no existe es null
      */
-    private Producto buscaProducto(Iterator<Producto> iterador, int codigo) {
+    private Producto buscaProducto(Iterator<Producto> iterador, int barras) {
     	while(iterador.hasNext()) {
-    		Producto p = iterador.next();
-    		if(p.getCodigoBarras() == codigo) {
-    			return p;
+    		Producto producto = iterador.next();
+    		if(producto.getCodigoBarras() == barras) {
+    			return producto;
     		}
     	}
     	return null;

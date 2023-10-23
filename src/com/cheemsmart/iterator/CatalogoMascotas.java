@@ -1,54 +1,31 @@
 package com.cheemsmart.iterator;
 
 import java.util.Iterator;
-import java.util.Set;
 import java.util.HashSet;
-import java.util.Random;
 
 import com.cheemsmart.facade.Producto;
 
 /**
- * Clase que implementa el catalogo del dapartamento de electrodomésticos de la tienda.
- * 
- * @author Cruz González, Irvin Javier
- * @author Ugalde Flores, Jimena
- * @author Ugalde Ubaldo, Fernando
- * 
- * @version 1.0
- * @since Java JDK 11.0
- * 
+ * Clase que representa al catálogo del departamento de Mascotas
  */
-public class CatalogoElectrodomesticos {
-	private Set<Producto> catalogo;
+public class CatalogoMascotas {
+	private HashSet<Producto> catalogo;
 	
 	/**
 	 * Método constructor
 	 */
-	public CatalogoElectrodomesticos() {
-		catalogo = new HashSet<>();	
-		
-		catalogo.add(new Producto(randomNum(7000, 7999), "Refrigerador Samsung", "Electrodomesticos", 10000));
-		catalogo.add(new Producto(randomNum(7000, 7999), "Lavadora Mabe", "Electrodomesticos", 15000));
-		catalogo.add(new Producto(randomNum(7000, 7999), "Aspiradora", "Electrodomesticos", 1500));
-		catalogo.add(new Producto(randomNum(7000, 7999), "Licuadora", "Electrodomesticos", 500));
-		catalogo.add(new Producto(randomNum(7000, 7999), "Extractor de jugos", "Electrodomesticos", 1200));
+	public CatalogoMascotas() {
+		catalogo= new HashSet<>();
+		catalogo.add(new Producto(4000, "Furry Ventures", "Transportadora para mascotas con camita", "Mascotas",2999.99));
+        catalogo.add(new Producto(4400, "Arenero de michis", "caja de arena para gato mediano", "Mascotas", 550.00));
+        catalogo.add(new Producto(4440, "Bandanas", "Viste a la moda a tu mascota con este set de 3 bandanas", "Mascotas", 532.00));
+        catalogo.add(new Producto(4444, "Disfraz calabaza", "Disfraz de calabaza para mascotas pequeñas", "Mascotas", 1555.00));
 	}
 	
 	/**
-	 * Método que da un número random dentro de un intervalo cerrado
-	 * @param low valor mínimo del intervalo
-	 * @param high valor máximo del intervalo
-	 * @return int número random dentro del intervalo
-	 */
-	private static int randomNum(int low, int high) {
-		Random r = new Random();
-		return r.nextInt(high - low) + low;
-	}
-	
-	/**
-	 * Método que devuelve el iterador
-	 * @return Iterator del catalogo
-	 */
+     * Método para obtener el catálogo específico
+	 * @return el iterador del catálogo
+     */
 	public Iterator<Producto> getIterator(){
 		return catalogo.iterator();
 	}
